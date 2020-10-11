@@ -1,16 +1,19 @@
 import React from 'react'
 
 import '../css/App.css'
-
+// square start point: top: 423px (bottom of square-section)
+// min jump: top: 323px (lowest)
+// max jump: top: 123px (highest)
 class App extends React.Component {
   state = {
-    squareTop: '423px'
+    squareTop: '323px',
+    jumping: false
   }
-  handleJumpStart = () => {
-    console.log('jump started!')
+  handleJumpButton = () => {
+    console.log('jump button!') 
   }
-  handleJumpEnd = () => {
-    console.log('jump ended!')
+  handleJumpPhysics = (tH) => {
+    // cool physics stuff coming soon!
   }
   render () {
     return (
@@ -25,8 +28,7 @@ class App extends React.Component {
         </div>
         <div 
           className='jump-button'
-          onMouseDown={this.handleJumpStart}
-          onMouseUp={this.handleJumpEnd}
+          onMouseDown={this.handleJumpButton}
         ></div>
       </div>
     )
@@ -34,6 +36,3 @@ class App extends React.Component {
 }
 
 export default App
-
-// min jump: top: 300px (lowest)
-// max jump: top: 123px (highest)
