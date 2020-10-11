@@ -5,7 +5,7 @@
 3. Once `targetHT` is reached, before falling back to the ground, square will appear to pause and hover very briefly
 4. This simulates the effect of gravity taking over after the force of the upward thrust has been expended
 
-`TargetHT` determined by duration of button press
+**`TargetHT` determined by duration of button press**
 - Minimum `targetHT` is 100px from ground.
 - Maximum `targetHT` is 300px from ground.
 - What is `upSpeed`?
@@ -16,13 +16,13 @@
 - If not, which is greater?
 - (leaning toward `upSpeed` being greater)
 
-handleJumpButton()
+**handleJumpButton()**
 - if jump already in progress, return/handle appropriately
 - else set state `jumping` boolean to true
 - determine `targetHT` based on button press duration
 - invoke handleJumpPhysics(`targetHT`)
 
-handleJumpPhysics(tH)
+**handleJumpPhysics(tH)**
 - send square up at `upSpeed` until *x%* of `targetHT` reached
 - reduce `upSpeed` to `finalUpSpeed` until `targetHT` reached
 - pause, letting square hover briefly 
