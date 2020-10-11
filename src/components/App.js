@@ -4,7 +4,10 @@ import '../css/App.css'
 
 class App extends React.Component {
     state = {
-        squareTop: '410px'
+        squareTop: '423px'
+    }
+    handleJump = () => {
+        // more stuff soon
     }
     render() {
         return (
@@ -24,3 +27,6 @@ class App extends React.Component {
 }
 
 export default App
+
+// min jump: top: 300px (lowest)
+// max jump: top: 123px (highest)
