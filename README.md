@@ -9,8 +9,8 @@ the effect of gravity taking over after the force of the upward
 thrust has been expended.
 
 `TargetHT` determined by duration of button press
-Minimum `targetHT` is 100px from ground.
-Maximum `targetHT` is 300px from ground.
+- Minimum `targetHT` is 100px from ground.
+- Maximum `targetHT` is 300px from ground.
 - What is `upSpeed`?
   - What % of `upSpeed` is `finalUpSpeed`?
 - What is `downSpeed`?
@@ -20,15 +20,15 @@ Maximum `targetHT` is 300px from ground.
 - (leaning toward `upSpeed` being greater)
 
 handleJumpButton()
-    - if jump already in progress, return/handle appropriately
-    - else set state `jumping` boolean to true
-    - determine `targetHT` based on button press duration
-    - invoke handleJumpPhysics(`targetHT`)
+- if jump already in progress, return/handle appropriately
+- else set state `jumping` boolean to true
+- determine `targetHT` based on button press duration
+- invoke handleJumpPhysics(`targetHT`)
 
 handleJumpPhysics(tH)
-    - send square up at `upSpeed` until *x%* of `targetHT` reached
-    - reduce `upSpeed` to `finalUpSpeed` until `targetHT` reached
-    - pause, letting square hover briefly 
-    - send square down at `downSpeed`
-    - set state `jumping` boolean to false
+- send square up at `upSpeed` until *x%* of `targetHT` reached
+- reduce `upSpeed` to `finalUpSpeed` until `targetHT` reached
+- pause, letting square hover briefly 
+- send square down at `downSpeed`
+- set state `jumping` boolean to false
 
