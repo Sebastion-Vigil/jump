@@ -1,11 +1,9 @@
 # jump
 
-## Square ascends at `upSpeed` until just before `targetHT` is reached.
-## Right before `targetHT` is reached *(x% of `targetHT`?)*, `upSpeed` will slow to a fraction of itself, becoming `finalUpSpeed`. 
-## Once `targetHT` is reached, before falling back to the ground, 
-## square will appear to pause and hover very briefly, simulating 
-## the effect of gravity taking over after the force of the upward 
-## thrust has been expended.
+1. Square ascends at `upSpeed` until just before `targetHT` is reached
+2. Right before `targetHT` is reached *(x% of `targetHT`?)*, `upSpeed` will slow to a fraction of itself, becoming `finalUpSpeed`
+3. Once `targetHT` is reached, before falling back to the ground, square will appear to pause and hover very briefly
+4. This simulates the effect of gravity taking over after the force of the upward thrust has been expended
 
 `TargetHT` determined by duration of button press
 - Minimum `targetHT` is 100px from ground.
