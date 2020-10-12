@@ -18,8 +18,8 @@ class App extends React.Component {
       buttonTimer: setInterval(() => {
         let pressDuration = this.state.buttonPressDuration
         console.log('button pressed for ' + pressDuration + ' milliseconds!')
-        if (pressDuration >= 500) {
-          this.clearButtonDuration()
+        if (pressDuration >= 600) {
+          this.handleJumpPhysics()
           return
         }
         pressDuration += 1
@@ -29,15 +29,12 @@ class App extends React.Component {
       }, 1)
     })
   }
-  clearButtonDuration = () => {
+  handleJumpPhysics = () => {
     clearInterval(this.state.buttonTimer)
     this.setState({
       buttonPressDuration: 0,
-      jumping: false // tmp for testing -> remove later
+      jumping: false
     })
-  }
-  handleJumpPhysics = (tH) => {
-    // cool physics stuff coming soon!
   }
   render () {
     return (
@@ -53,7 +50,7 @@ class App extends React.Component {
         <div 
           className='jump-button'
           onMouseDown={this.handleJumpButton}
-          onMouseUp={this.clearButtonDuration}
+          onMouseUp={this.handleJumpPhysics}
         ></div>
       </div>
     )
