@@ -20,7 +20,6 @@ class App extends React.Component {
   handleButtonDown = () => {
     if (this.state.jumping) return
     this.setState({
-      jumping: true,
       buttonTimer: setInterval(() => {
         let pressDuration = this.state.buttonPressDuration
         let targetHT = this.state.targetHeight
@@ -42,11 +41,13 @@ class App extends React.Component {
     this.handleJumpPhysics()
   }
   handleJumpPhysics = () => {
+    if (this.state.jumping) return
     this.ascend()
   }
   ascend = () => {
     let speed = this.state.upSpeed
     this.setState({
+      jumping: true,
       upTimer: setInterval(() => {
         let squareT = parseInt(this.state.squareTop)
         let currentHT = this.state.currentHeight
@@ -87,9 +88,10 @@ class App extends React.Component {
     this.setState({
       buttonPressDuration: 0,
       targetHeight: 100,
-      currentHeight: 0
+      currentHeight: 0,
+      jumping: false
     })
-  }
+  } 
   render () {
     return (
       <div className='App'>
