@@ -1,7 +1,7 @@
 # jump
 
 1. Square ascends at `upSpeed` until just before `targetHT` is reached
-2. Right before `targetHT` is reached *(x% of `targetHT`?)*, `upSpeed` slows dramatically, becoming `finalUpSpeed`
+2. Right before `targetHT` is reached *(90% of `targetHT`?)*, `upSpeed` slows dramatically, becoming `finalUpSpeed`
 3. Once `targetHT` is reached, before falling back to the ground, square will pause and hover very briefly
 4. This simulates the effect of gravity taking over after the upward force has been expended
 
@@ -24,7 +24,7 @@
 
 **handleJumpPhysics(tH)**
 - stop button timer
-- send square up at `upSpeed` until *x%* of `targetHT` reached
+- send square up at `upSpeed` until *90%* of `targetHT` reached
 - reduce `upSpeed` to `finalUpSpeed` until `targetHT` reached
 - pause, letting square hover briefly 
 - send square down at `downSpeed`

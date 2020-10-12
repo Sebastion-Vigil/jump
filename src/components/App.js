@@ -9,16 +9,17 @@ class App extends React.Component {
     squareTop: '423px',
     jumping: false,
     buttonTimer: undefined,
-    buttonPressDuration: 0
+    buttonPressDuration: undefined
   }
   handleJumpButton = () => {
     if (this.state.jumping) return
     this.setState({
       jumping: true,
       buttonTimer: setInterval(() => {
-        let pressDuration = this.state.buttonPressDuration
-        console.log('button pressed for ' + pressDuration + ' milliseconds!')
-        if (pressDuration >= 600) {
+        let pressDuration = !isNaN(this.state.buttonPressDuration)
+          ? this.state.buttonPressDuration
+          : 0
+        if (pressDuration >= 60) {
           this.handleJumpPhysics()
           return
         }
@@ -31,8 +32,12 @@ class App extends React.Component {
   }
   handleJumpPhysics = () => {
     clearInterval(this.state.buttonTimer)
+    if (isNaN(this.state.buttonPressDuration)) return
+    console.log('buttonPressDuration: ', this.state.buttonPressDuration)
+    let targetHT = this.state.buttonPressDuration * 5
+    targetHT = targetHT > 100 ? targetHT : 100 // min targetHT of 100
     this.setState({
-      buttonPressDuration: 0,
+      buttonPressDuration: undefined,
       jumping: false
     })
   }
@@ -47,7 +52,7 @@ class App extends React.Component {
             }}
           ></div>
         </div>
-        <div 
+        <div
           className='jump-button'
           onMouseDown={this.handleJumpButton}
           onMouseUp={this.handleJumpPhysics}
