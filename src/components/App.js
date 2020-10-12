@@ -6,11 +6,35 @@ import '../css/App.css'
 // max jump: top: 123px (highest)
 class App extends React.Component {
   state = {
-    squareTop: '323px',
-    jumping: false
+    squareTop: '423px',
+    jumping: false,
+    buttonTimer: undefined,
+    buttonPressDuration: 0
   }
   handleJumpButton = () => {
-    console.log('jump button!') 
+    if (this.state.jumping) return
+    this.setState({
+      jumping: true,
+      buttonTimer: setInterval(() => {
+        let pressDuration = this.state.buttonPressDuration
+        console.log('button pressed for ' + pressDuration + ' milliseconds!')
+        if (pressDuration >= 500) {
+          this.clearButtonDuration()
+          return
+        }
+        pressDuration += 1
+        this.setState({
+          buttonPressDuration: pressDuration
+        })
+      }, 1)
+    })
+  }
+  clearButtonDuration = () => {
+    clearInterval(this.state.buttonTimer)
+    this.setState({
+      buttonPressDuration: 0,
+      jumping: false // tmp for testing -> remove later
+    })
   }
   handleJumpPhysics = (tH) => {
     // cool physics stuff coming soon!
@@ -29,6 +53,7 @@ class App extends React.Component {
         <div 
           className='jump-button'
           onMouseDown={this.handleJumpButton}
+          onMouseUp={this.clearButtonDuration}
         ></div>
       </div>
     )
