@@ -14,7 +14,8 @@
   - `downSpeed` is constant
 - Are `upSpeed`/`downSpeed` the same?
 - If not, which is greater?
-- (leaning toward `upSpeed` being greater)
+- (actually, `downSpeed` should be greater)
+  - Min speed is 1 ms, so is this even possible?
 
 **handleJumpButton()**
 - if jump already in progress, return/handle appropriately
@@ -27,7 +28,7 @@
 - send square up at `upSpeed` until *90%* of `targetHT` reached
 - reduce `upSpeed` to `finalUpSpeed` until `targetHT` reached
 - pause, letting square hover briefly 
+  - (10 milliseconds or so at most)
 - send square down at `downSpeed`
 - reset state `buttonPressDuration` to 0
 - set state `jumping` boolean to false
-

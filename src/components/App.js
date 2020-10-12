@@ -9,36 +9,39 @@ class App extends React.Component {
     squareTop: '423px',
     jumping: false,
     buttonTimer: undefined,
-    buttonPressDuration: undefined
+    buttonPressDuration: 0,
+    targetHeight: 100
   }
   handleJumpButton = () => {
     if (this.state.jumping) return
     this.setState({
       jumping: true,
       buttonTimer: setInterval(() => {
-        let pressDuration = !isNaN(this.state.buttonPressDuration)
-          ? this.state.buttonPressDuration
-          : 0
+        let pressDuration = this.state.buttonPressDuration
+        let targetHT = this.state.targetHeight
         if (pressDuration >= 60) {
           this.handleJumpPhysics()
           return
         }
         pressDuration += 1
+        targetHT = pressDuration * 5 > 100 ? pressDuration * 5 : targetHT
         this.setState({
-          buttonPressDuration: pressDuration
+          buttonPressDuration: pressDuration,
+          targetHeight: targetHT
         })
       }, 1)
     })
   }
   handleJumpPhysics = () => {
+    if (this.state.buttonPressDuration === 0 && !this.state.jumping) return
     clearInterval(this.state.buttonTimer)
-    if (isNaN(this.state.buttonPressDuration)) return
-    console.log('buttonPressDuration: ', this.state.buttonPressDuration)
-    let targetHT = this.state.buttonPressDuration * 5
-    targetHT = targetHT > 100 ? targetHT : 100 // min targetHT of 100
+    // console.log('buttonPressDuration: ', this.state.buttonPressDuration)
+    // console.log('targetHT: ', this.state.targetHeight)
+    
     this.setState({
-      buttonPressDuration: undefined,
-      jumping: false
+      buttonPressDuration: 0,
+      jumping: false,
+      targetHeight: 100
     })
   }
   render () {
