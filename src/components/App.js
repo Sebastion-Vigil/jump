@@ -13,7 +13,7 @@ class App extends React.Component {
     downTimer: undefined,
     upSpeed: 1,
     downSpeed: 1,
-    buttonPressDuration: 0,
+    buttonPressDuration: undefined,
     targetHeight: 100,
     currentHeight: 0,
   }
@@ -21,7 +21,7 @@ class App extends React.Component {
     if (this.state.jumping) return
     this.setState({
       buttonTimer: setInterval(() => {
-        let pressDuration = this.state.buttonPressDuration
+        let pressDuration = !isNaN(this.state.buttonPressDuration) ? this.state.buttonPressDuration : 0
         let targetHT = this.state.targetHeight
         if (pressDuration >= 60 && targetHT >= 300) {
           this.handleButtonDuration()
@@ -37,11 +37,11 @@ class App extends React.Component {
     })
   }
   handleButtonDuration = () => {
+    if (this.state.jumping || isNaN(this.state.buttonPressDuration)) return
     clearInterval(this.state.buttonTimer)
     this.handleJumpPhysics()
   }
   handleJumpPhysics = () => {
-    if (this.state.jumping) return
     this.ascend()
   }
   ascend = () => {
@@ -86,7 +86,7 @@ class App extends React.Component {
   handleJumpFinished = () => {
     clearInterval(this.state.downTimer)
     this.setState({
-      buttonPressDuration: 0,
+      buttonPressDuration: undefined,
       targetHeight: 100,
       currentHeight: 0,
       jumping: false
