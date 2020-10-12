@@ -24,12 +24,14 @@
 - determine `targetHT` based on `buttonPressDuration`
 - invoke handleJumpPhysics(`targetHT`)
 
+**handleButtonDuration()**
+- Stop `buttonTimer`
+
 **handleJumpPhysics(tH)**
-- stop button timer
 - send square up at `upSpeed` until *90%* of `targetHT` reached
 - reduce `upSpeed` to `finalUpSpeed` until `targetHT` reached
 - pause, letting square hover briefly 
-  - (10 milliseconds or so at most)
+  - (a few milliseconds or so at most)
 - send square down at `downSpeed`
 - reset state `buttonPressDuration` to 0
 - set state `jumping` boolean to false
