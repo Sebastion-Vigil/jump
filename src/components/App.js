@@ -10,7 +10,10 @@ class App extends React.Component {
     jumping: false,
     buttonTimer: undefined,
     buttonPressDuration: 0,
-    targetHeight: 100
+    targetHeight: 100,
+    xPercentTargetHeight: 10,
+    jumpTimer: undefined,
+    speed: 0
   }
   handleJumpButton = () => {
     if (this.state.jumping) return
@@ -19,30 +22,60 @@ class App extends React.Component {
       buttonTimer: setInterval(() => {
         let pressDuration = this.state.buttonPressDuration
         let targetHT = this.state.targetHeight
+        let xPercentTargetHT = this.state.xPercentTargetHeight
         if (pressDuration >= 60) {
-          this.handleJumpPhysics()
+          this.handleButtonDuration()
           return
         }
         pressDuration += 1
         targetHT = pressDuration * 5 > 100 ? pressDuration * 5 : targetHT
+        xPercentTargetHT = targetHT - Math.round(targetHT * 0.9)
         this.setState({
           buttonPressDuration: pressDuration,
-          targetHeight: targetHT
+          targetHeight: targetHT,
+          xPercentTargetHeight: xPercentTargetHT
         })
       }, 1)
     })
   }
-  handleJumpPhysics = () => {
+  handleButtonDuration = () => {
     if (this.state.buttonPressDuration === 0 && !this.state.jumping) return
     clearInterval(this.state.buttonTimer)
-    // console.log('buttonPressDuration: ', this.state.buttonPressDuration)
-    // console.log('targetHT: ', this.state.targetHeight)
-    
+    this.handleJumpPhysics()
     this.setState({
       buttonPressDuration: 0,
       jumping: false,
       targetHeight: 100
     })
+  }
+  handleJumpPhysics = () => {
+    const originalTargetHT = this.state.targetHeight
+    const originalSquareT = parseInt(this.state.squareTop)
+    const difference = originalSquareT - originalTargetHT
+    this.setState({
+      jumpTimer: setInterval(() => {
+        let squareT = parseInt(this.state.squareTop)
+        if (squareT < difference) {
+          this.clearJumpTimer()
+          console.log(this.state)
+          return
+        }
+        let targetHT = this.state.targetHeight
+        let jumpFallSpeed = this.state.speed
+        squareT -= 1
+        targetHT -= 1
+        jumpFallSpeed =
+          targetHT <= this.state.xPercentTargetHeight && targetHT > 0 ? 10 : 0
+        this.setState({
+          squareTop: squareT + 'px',
+          targetHeight: targetHT,
+          speed: jumpFallSpeed
+        })
+      })
+    })
+  }
+  clearJumpTimer = () => {
+    clearInterval(this.state.jumpTimer)
   }
   render () {
     return (
@@ -58,7 +91,7 @@ class App extends React.Component {
         <div
           className='jump-button'
           onMouseDown={this.handleJumpButton}
-          onMouseUp={this.handleJumpPhysics}
+          onMouseUp={this.handleButtonDuration}
         ></div>
       </div>
     )
