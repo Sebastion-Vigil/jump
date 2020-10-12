@@ -16,6 +16,7 @@
 - If not, which is greater?
 - (actually, `downSpeed` should be greater)
   - Min speed is 1 ms, so is this even possible?
+  - (maybe decrement `squareTop` by more than 1px)
 
 **handleJumpButton()**
 - if jump already in progress, return/handle appropriately
