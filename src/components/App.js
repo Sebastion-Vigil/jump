@@ -15,20 +15,22 @@ class App extends React.Component {
     downSpeed: 1,
     buttonPressDuration: undefined,
     targetHeight: 100,
-    currentHeight: 0,
+    currentHeight: 0
   }
   handleButtonDown = () => {
     if (this.state.jumping) return
     this.setState({
       buttonTimer: setInterval(() => {
-        let pressDuration = !isNaN(this.state.buttonPressDuration) ? this.state.buttonPressDuration : 0
+        let pressDuration = !isNaN(this.state.buttonPressDuration)
+          ? this.state.buttonPressDuration
+          : 0
         let targetHT = this.state.targetHeight
-        if (pressDuration >= 60 && targetHT >= 300) {
+        if (pressDuration >= 50 && targetHT >= 300) {
           this.handleButtonDuration()
           return
         }
         pressDuration += 1
-        targetHT = pressDuration * 5 > 100 ? pressDuration * 5 : targetHT
+        targetHT = pressDuration * 6 > 100 ? pressDuration * 6 : targetHT
         this.setState({
           buttonPressDuration: pressDuration,
           targetHeight: targetHT
@@ -51,12 +53,12 @@ class App extends React.Component {
       upTimer: setInterval(() => {
         let squareT = parseInt(this.state.squareTop)
         let currentHT = this.state.currentHeight
-        if (currentHT === this.state.targetHeight) {
+        if (currentHT >= this.state.targetHeight) {
           this.descend()
           return
         }
-        squareT -= 1
-        currentHT += 1
+        squareT -= 3
+        currentHT += 3
         this.setState({
           squareTop: squareT + 'px',
           currentHeight: currentHT
@@ -70,12 +72,12 @@ class App extends React.Component {
       downTimer: setInterval(() => {
         let squareT = parseInt(this.state.squareTop)
         let currentHT = this.state.currentHeight
-        if (currentHT === 0) {
+        if (currentHT <= 0) {
           this.handleJumpFinished()
           return
         }
-        squareT += 1
-        currentHT -= 1
+        squareT += 3
+        currentHT -= 3
         this.setState({
           squareTop: squareT + 'px',
           currentHeight: currentHT
@@ -85,13 +87,14 @@ class App extends React.Component {
   }
   handleJumpFinished = () => {
     clearInterval(this.state.downTimer)
+    console.log('targetHT jump finished: ', this.state.targetHeight)
     this.setState({
       buttonPressDuration: undefined,
       targetHeight: 100,
       currentHeight: 0,
       jumping: false
     })
-  } 
+  }
   render () {
     return (
       <div className='App'>
