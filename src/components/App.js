@@ -18,7 +18,7 @@ class App extends React.Component {
     currentHeight: 0
   }
   handleButtonDown = () => {
-    if (this.state.jumping) return
+    if (this.state.jumping) return // exit function if already in jumping state
     this.setState({
       buttonTimer: setInterval(() => {
         let pressDuration = !isNaN(this.state.buttonPressDuration)
@@ -116,3 +116,26 @@ class App extends React.Component {
   }
 }
 export default App
+// as code stands, program waits for press duration to finish before executing
+// need to execute as targetHT is being determined, up to targetHT
+// as button pressed:
+  // square ascends up to targetHT, determined by buttonPressDuration
+  // square pauses briefly in mid air
+  // square descends
+  // reset state vars
+// need onMouseDown() without a doubt
+// do we really need a onMouseUp() method?
+  // (methinks not)
+// handleButtonPress()
+  //
+// ascend()
+  //
+// descend()
+  //
+// pause()
+  //
+
+
+
+
+
