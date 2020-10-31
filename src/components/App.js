@@ -10,7 +10,10 @@ class App extends React.Component {
     jumping: false,
     buttonPressDuration: undefined, 
     targetHT: 100,
-    currentHT: 0
+    currentHT: 0,
+    buttonTimer: undefined,
+    upTimer: undefined,
+    downTimer: undefined
   }
 
   handleButtonPress = () => {
@@ -23,15 +26,37 @@ class App extends React.Component {
   }
 
   ascend = () => {
+    // this should only ascend the square
+    this.setState({
+      upTimer: setInterval(() => {
+        let squareT = parseInt(this.state.squareTop)
+        squareT -= 3
+        this.setState({
+          squareTop: squareT
+        })
+      }, 1)
+    })
   }
 
   pause = () => {
+    // this should only pause the square
   }
 
   descend = () => {
+    // this should only descend the square
+    this.setState({
+      upTimer: setInterval(() => {
+        let squareT = parseInt(this.state.squareTop)
+        squareT += 3
+        this.setState({
+          squareTop: squareT
+        })
+      }, 1)
+    })
   }
 
   reset = () => {
+    // this should only reset square after jump
   }
   
   render () {
@@ -76,8 +101,3 @@ export default App
   //
 // pause()
   //
-
-
-
-
-
