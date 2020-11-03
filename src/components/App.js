@@ -8,7 +8,7 @@ class App extends React.Component {
   state = {
     squareTop: '423px',
     jumping: false,
-    buttonPressDuration: undefined, 
+    buttonPressDuration: undefined,
     targetHT: 100,
     currentHT: 0,
     buttonTimer: undefined,
@@ -16,13 +16,29 @@ class App extends React.Component {
     downTimer: undefined
   }
 
+  stopMovementTimer = (whichTimer) => {
+    if (whichTimer === 'up') {
+      clearInterval(this.state.upTimer)
+    }
+    if (whichTimer === 'down') {
+      clearInterval(this.state.downTimer)
+    }
+  }
+
+  initializeJump = () => {
+    if (this.state.jumping) return
+    console.log('jump initialized!')
+    this.setState({
+      jumping: true
+    })
+  }
+
   handleButtonPress = () => {
-    // this method handles it all
-    // is already jumping?
-    // need to ascend?
-    // need to pause?
-    // need to descend?
-    // need to reset?
+    this.initializeJump()
+    console.log('button pressed!')
+    let pressDuration = !isNaN(this.state.buttonPressDuration)
+    ? this.state.buttonPressDuration 
+    : 0
   }
 
   ascend = () => {
@@ -32,7 +48,7 @@ class App extends React.Component {
         let squareT = parseInt(this.state.squareTop)
         squareT -= 3
         this.setState({
-          squareTop: squareT
+          squareTop: squareT + 'px'
         })
       }, 1)
     })
@@ -49,7 +65,7 @@ class App extends React.Component {
         let squareT = parseInt(this.state.squareTop)
         squareT += 3
         this.setState({
-          squareTop: squareT
+          squareTop: squareT + 'px'
         })
       }, 1)
     })
@@ -57,9 +73,15 @@ class App extends React.Component {
 
   reset = () => {
     // this should only reset square after jump
+    this.setState({
+      buttonPressDuration: undefined,
+      targetHeight: 100,
+      currentHeight: 0,
+      jumping: false
+    })
   }
-  
-  render () {
+
+  render() {
     return (
       <div className='App'>
         <div className='square-section'>
