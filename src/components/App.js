@@ -50,8 +50,13 @@ class App extends React.Component {
     console.log('button up!')
     clearInterval(this.state.buttonTimer)
     this.setState({
-      buttonPressDuration: undefined,
-      jumping: false
+      descendTimer: setInterval(() => {
+        if (parseInt(this.state.squareTop) >= 423) {
+          this.reset()
+          return
+        }
+        this.descend()
+      }, 1)
     })
   }
 
@@ -79,10 +84,12 @@ class App extends React.Component {
 
   reset = () => {
     // this should only reset square after jump
+    clearInterval(this.state.descendTimer)
     this.setState({
       targetHeight: 0,
       currentHeight: 0,
-      jumping: false
+      jumping: false,
+      buttonPressDuration: undefined
     })
   }
 
