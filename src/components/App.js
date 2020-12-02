@@ -8,35 +8,22 @@ class App extends React.Component {
   state = {
     squareTop: '423px',
     jumping: false,
-    buttonPressDuration: undefined,
-    targetHT: 0, // make no min jump ht
-    currentHT: 0,
+    buttonPressDuration: 0,
     buttonTimer: undefined,
     descendTimer: undefined
   }
 
-  initializeJump = () => {
-    console.log('jump initialized!')
-    this.setState({
-      jumping: true
-    })
-  }
-
   handleButtonDown = () => {
-    if (this.state.jumping) return
-    this.initializeJump()
-    console.log('button down!')
-    let pressDuration = !isNaN(this.state.buttonPressDuration)
-    ? this.state.buttonPressDuration 
-    : 0
+    let pressDuration = 0
     this.setState({
+      jumping: true,
       buttonTimer: setInterval(() => {
         if (this.state.buttonPressDuration > 125) {
           this.handleButtonUp()
           return
         }
+        console.log(this.state.buttonPressDuration)
         this.ascend()
-        console.log('buttonPressDuration: ', this.state.buttonPressDuration)
         pressDuration += 1
         this.setState({
           buttonPressDuration: pressDuration
@@ -46,8 +33,6 @@ class App extends React.Component {
   }
 
   handleButtonUp = () => {
-    if (!this.state.jumping) return
-    console.log('button up!')
     clearInterval(this.state.buttonTimer)
     this.setState({
       descendTimer: setInterval(() => {
@@ -56,11 +41,15 @@ class App extends React.Component {
           return
         }
         this.descend()
-      }, 1)
+      })
+    })
+    this.setState({
+      buttonPressDuration: 0
     })
   }
 
   ascend = () => {
+    console.log('going up!')
     // this should only ascend the square
     let squareT = parseInt(this.state.squareTop)
     squareT -= 3
@@ -69,11 +58,8 @@ class App extends React.Component {
     })
   }
 
-  pause = () => {
-    // this should only pause the square
-  }
-
   descend = () => {
+    console.log('going down!')
     // this should only descend the square
     let squareT = parseInt(this.state.squareTop)
     squareT += 3
@@ -83,17 +69,13 @@ class App extends React.Component {
   }
 
   reset = () => {
-    // this should only reset square after jump
     clearInterval(this.state.descendTimer)
     this.setState({
-      targetHeight: 0,
-      currentHeight: 0,
-      jumping: false,
-      buttonPressDuration: undefined
+      jumping: false
     })
   }
 
-  render() {
+  render () {
     return (
       <div className='App'>
         <div className='square-section'>
@@ -117,22 +99,22 @@ export default App
 // as code stands, program waits for press duration to finish before executing
 // need to execute as targetHT is being determined, up to targetHT
 // as button pressed:
-  // square ascends up to targetHT, determined by buttonPressDuration
-  // square pauses briefly in mid air
-  // square descends
-  // reset state vars
+// square ascends up to targetHT, determined by buttonPressDuration
+// square pauses briefly in mid air
+// square descends
+// reset state vars
 // need onMouseDown() without a doubt
 // do we really need a onMouseUp() method?
-  // (methinks not)
+// (methinks not)
 // handleButtonPress()
-  // is already jumping?
-  // need to ascend?
-  // need to descend?
-  // need to pause?
-  // time to reset?
+// is already jumping?
+// need to ascend?
+// need to descend?
+// need to pause?
+// time to reset?
 // ascend()
-  //
+//
 // descend()
-  //
+//
 // pause()
-  //
+//
