@@ -34,7 +34,6 @@ class App extends React.Component {
   }
 
   handleButtonUp = () => {
-    if (!this.state.jumping) return
     clearInterval(this.state.buttonTimer)
     this.setState({
       descendTimer: setInterval(() => {
@@ -44,9 +43,6 @@ class App extends React.Component {
         }
         this.descend()
       })
-    })
-    this.setState({
-      buttonPressDuration: 0
     })
   }
 
@@ -73,7 +69,8 @@ class App extends React.Component {
   reset = () => {
     clearInterval(this.state.descendTimer)
     this.setState({
-      jumping: false
+      jumping: false,
+      buttonPressDuration: 0
     })
   }
 
@@ -91,7 +88,6 @@ class App extends React.Component {
         <div
           className='jump-button'
           onMouseDown={this.handleButtonDown}
-          onMouseUp={this.handleButtonUp}
         ></div>
       </div>
     )
