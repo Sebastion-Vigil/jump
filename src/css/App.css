@@ -22,7 +22,9 @@
   left: 350px;
   width: 75px;
   height: 75px;
-  border: .5px solid white;
+  border: .5px solid darkslategrey;
+  background-image: url('../imgs/SuperIsa.png');
+  background-size: 100% 100%;
   /* border-radius: 50%; */
 }
 
