@@ -6,23 +6,39 @@
     justify-content: space-evenly;
     align-items: center;
     border: .5px solid white;
-    border-radius: 25px;
+    border-radius: 10px;
 }
 
-.square-section {
+.game-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: 775px;
-  height: 500px;
+  height: 515px;
   border: .5px solid gold;
-  border-radius: 35px;
+  /* border-radius: 35px; */
+}
+
+.background {
+  height: 470px;
+  width: 770px;
+  background-color: green;
+}
+
+.foreground {
+  height: 45px;
+  width: 770px;
+  background-color: darkslategrey;
 }
 
 .square {
   position: absolute;
-  left: 350px;
+  left: 100px;
   width: 75px;
   height: 75px;
-  border: .5px solid darkslategrey;
+  /* border: .5px solid darkslategrey; */
   background-image: url('../imgs/SuperIsa.png');
   background-size: 100% 100%;
   /* border-radius: 50%; */

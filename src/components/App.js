@@ -95,7 +95,9 @@ class App extends React.Component {
   render () {
     return (
       <div className='App'>
-        <div className='square-section'>
+        <div className='game-screen'>
+          <div className='background'></div>
+          <div className='foreground'></div>
           <div
             className='square'
             style={{
