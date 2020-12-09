@@ -6,7 +6,7 @@ import '../css/App.css'
 // max jump: top: 123px (highest)
 class App extends React.Component {
   state = {
-    squareTop: '423px',
+    squareTop: '375px',
     goingUp: false,
     goingDown: false,
     buttonPressDuration: 0,
@@ -34,7 +34,7 @@ class App extends React.Component {
     let pressDuration = this.state.buttonPressDuration
     this.setState({
       buttonTimer: setInterval(() => {
-        console.log('pressDuration: ', pressDuration)
+        // console.log('pressDuration: ', pressDuration)
         if (pressDuration > 125) {
           this.handleButtonUp()
           return
@@ -50,13 +50,13 @@ class App extends React.Component {
 
   handleButtonUp = () => {
     if (this.state.goingDown) return
-    if (parseInt(this.state.squareTop) >= 423) return
+    if (parseInt(this.state.squareTop) >= 375) return
     this.startDescension()
     clearInterval(this.state.buttonTimer)
     this.setState({
       descendTimer: setInterval(() => {
         this.descend()
-        if (parseInt(this.state.squareTop) >= 423) {
+        if (parseInt(this.state.squareTop) >= 375) {
           this.reset()
           return
         }
@@ -65,7 +65,7 @@ class App extends React.Component {
   }
 
   ascend = () => {
-    console.log('going up!')
+    // console.log('going up!')
     let squareT = parseInt(this.state.squareTop)
     squareT -= 3
     this.setState({
@@ -74,7 +74,7 @@ class App extends React.Component {
   }
 
   descend = () => {
-    console.log('going down!')
+    // console.log('going down!')
     let squareT = parseInt(this.state.squareTop)
     squareT += 3
     this.setState({
@@ -85,7 +85,7 @@ class App extends React.Component {
   reset = () => {
     clearInterval(this.state.descendTimer)
     this.setState({
-      squareTop: '423px',
+      squareTop: '375px',
       goingUp: false,
       goingDown: false,
       buttonPressDuration: 0
@@ -96,8 +96,12 @@ class App extends React.Component {
     return (
       <div className='App'>
         <div className='game-screen'>
-          <div className='background'></div>
-          <div className='foreground'></div>
+          <div className='background'>
+            <div className='background-strip'></div>
+          </div>
+          <div className='foreground'>
+            <div className='foreground-strip'></div>
+          </div>
           <div
             className='square'
             style={{
