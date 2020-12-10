@@ -22,32 +22,41 @@
 }
 
 .background {
+  position: relative;
   width: 775px;
   height: 420px;
-  background-color: green;
+  overflow: hidden;
+  /* background-color: green; */
   /* border: .5px solid magenta */
 }
 
 .background-strip {
+  position: absolute;
+  height: 420px;
+  width: 1550px;
+  background-image: url('../imgs/backgroundStrip.png');
+  background-size: 100% 100%;
 }
 
 .foreground {
-  display: flex;
+  position: relative;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-start; */
   height: 95px;
   width: 775px;
   /* background-color: darkslategrey; */
-  border: 1px solid magenta;
-  overflow-x: hidden;
+  /* border: 1px solid turquoise; */
+  overflow: hidden;
 }
 
 .foreground-strip {
+  position: absolute;
   height: 95px;
-  width: 1550px;
-  border: .5px solid green;
-  background-image: url('../imgs/foregroundStrip.png');
+  width: 2325px;
+  /* border: .5px solid green; */
+  background-image: url('../imgs/foregroundStrip2.png');
   background-size: 100% 100%;
   
 }
@@ -57,7 +66,7 @@
   left: 100px;
   width: 75px;
   height: 75px;
-  /* border: .5px solid darkslategrey; */
+  /* border: .5px solid orange; */
   background-image: url('../imgs/SuperIsa.png');
   background-size: 100% 100%;
   /* border-radius: 50%; */
@@ -67,5 +76,12 @@
   height: 75px;
   width: 775px;
   border: .5px solid red;
+  border-radius: 35px;
+}
+
+.start-button {
+  height: 25px;
+  width: 75px;
+  border: .5px solid blue;
   border-radius: 35px;
 }

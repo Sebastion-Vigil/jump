@@ -11,7 +11,12 @@ class App extends React.Component {
     goingDown: false,
     buttonPressDuration: 0,
     buttonTimer: undefined,
-    descendTimer: undefined
+    descendTimer: undefined,
+    foregroundLeft: '0px',
+    backgroundLeft: '0px',
+    gameActive: false,
+    foregroundTimer: undefined,
+    backgroundTimer: undefined
   }
 
   startAscension = () => {
@@ -26,6 +31,34 @@ class App extends React.Component {
     this.setState({
       goingDown: true
     })
+  }
+
+  toggleStartButton = () => {
+    let fLeft = parseInt(this.state.foregroundLeft)
+    if (this.state.gameActive) {
+      clearInterval(this.state.foregroundTimer)
+      this.setState({
+        gameActive: false
+      })
+    } else {
+      this.setState({
+        gameActive: true,
+        foregroundTimer: setInterval(() => {
+          fLeft += -2
+          if (fLeft === -1500) {
+            console.log('resetting foregroundLeft!')
+            fLeft = 0
+          }
+          this.setState({
+            foregroundLeft: fLeft + 'px'
+          })
+        }, 1)
+      })
+    }
+  }
+
+  startBackground = () => {
+    
   }
 
   handleButtonDown = () => {
@@ -97,10 +130,21 @@ class App extends React.Component {
       <div className='App'>
         <div className='game-screen'>
           <div className='background'>
-            <div className='background-strip'></div>
+            <div 
+              className='background-strip'
+              style={{
+                left: this.state.backgroundLeft
+              }}
+            ></div>
           </div>
           <div className='foreground'>
-            <div className='foreground-strip'></div>
+            <div 
+              className='foreground-strip'
+              style={{
+                left: this.state.foregroundLeft
+              }}
+            >
+            </div>
           </div>
           <div
             className='square'
@@ -113,6 +157,10 @@ class App extends React.Component {
           className='jump-button'
           onMouseDown={this.handleButtonDown}
           onMouseUp={this.handleButtonUp}
+        ></div>
+        <div 
+          className='start-button'
+          onClick={this.toggleStartButton}
         ></div>
       </div>
     )
