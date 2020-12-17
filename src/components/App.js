@@ -22,7 +22,7 @@ class App extends React.Component {
   startAscension = () => {
     console.log('starting ascension!')
     this.setState({
-      goingUp: true,
+      goingUp: true
     })
   }
 
@@ -34,40 +34,21 @@ class App extends React.Component {
   }
 
   toggleStartButton = () => {
-    let fLeft = parseInt(this.state.foregroundLeft)
     if (this.state.gameActive) {
       clearInterval(this.state.foregroundTimer)
+      clearInterval(this.state.backgroundTimer)
       this.setState({
         gameActive: false
       })
     } else {
-      this.setState({
-        gameActive: true,
-        foregroundTimer: setInterval(() => {
-          fLeft += -2
-          if (fLeft === -1500) {
-            console.log('resetting foregroundLeft!')
-            fLeft = 0
-          }
-          this.setState({
-            foregroundLeft: fLeft + 'px'
-          })
-        }, 1)
-      })
+      this.startForeground()
+      this.startBackground()
     }
   }
-
-  startBackground = () => {
-    
-  }
-
-  handleButtonDown = () => {
-    if (this.state.goingUp) return
-    this.startAscension()
+  calculateButtonPress = () => {
     let pressDuration = this.state.buttonPressDuration
     this.setState({
       buttonTimer: setInterval(() => {
-        // console.log('pressDuration: ', pressDuration)
         if (pressDuration > 125) {
           this.handleButtonUp()
           return
@@ -79,6 +60,43 @@ class App extends React.Component {
         })
       })
     })
+  }
+  startForeground = () => {
+    let fLeft = parseInt(this.state.foregroundLeft)
+    this.setState({
+      gameActive: true,
+      foregroundTimer: setInterval(() => {
+        fLeft += -2
+        if (fLeft === -1550) {
+          console.log('resetting foregroundLeft!')
+          fLeft = 0
+        }
+        this.setState({
+          foregroundLeft: fLeft + 'px'
+        })
+      }, 1)
+    })
+  }
+  startBackground = () => {
+    let bLeft = parseInt(this.state.backgroundLeft)
+    this.setState({
+      backgroundTimer: setInterval(() => {
+        bLeft += -1
+        if (bLeft === -1550) {
+          console.log('resetting backgroundLeft')
+          bLeft = 0
+        }
+        this.setState({
+          backgroundLeft: bLeft + 'px'
+        })
+      },40)
+    })
+  }
+
+  handleButtonDown = () => {
+    if (this.state.goingUp) return
+    this.startAscension()
+    this.calculateButtonPress()
   }
 
   handleButtonUp = () => {
@@ -130,7 +148,7 @@ class App extends React.Component {
       <div className='App'>
         <div className='game-screen'>
           <div className='background'>
-            <div 
+            <div
               className='background-strip'
               style={{
                 left: this.state.backgroundLeft
@@ -138,13 +156,12 @@ class App extends React.Component {
             ></div>
           </div>
           <div className='foreground'>
-            <div 
+            <div
               className='foreground-strip'
               style={{
                 left: this.state.foregroundLeft
               }}
-            >
-            </div>
+            ></div>
           </div>
           <div
             className='square'
@@ -158,10 +175,7 @@ class App extends React.Component {
           onMouseDown={this.handleButtonDown}
           onMouseUp={this.handleButtonUp}
         ></div>
-        <div 
-          className='start-button'
-          onClick={this.toggleStartButton}
-        ></div>
+        <div className='start-button' onClick={this.toggleStartButton}></div>
       </div>
     )
   }
