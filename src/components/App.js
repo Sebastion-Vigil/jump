@@ -52,7 +52,8 @@ class App extends React.Component {
     let pressDuration = this.state.buttonPressDuration
     this.setState({
       buttonTimer: setInterval(() => {
-        if (pressDuration > 125) { // stop & exit if more than cap
+        if (pressDuration > 80) {
+          // stop & exit if more than cap
           this.handleButtonUp()
           return
         }
@@ -94,7 +95,7 @@ class App extends React.Component {
         this.setState({
           backgroundLeft: bLeft + 'px'
         })
-      },40)
+      }, 40)
     })
   }
 
@@ -138,7 +139,8 @@ class App extends React.Component {
     })
   }
 
-  reset = () => { // resets game
+  reset = () => {
+    // resets game
     clearInterval(this.state.descendTimer)
     this.setState({
       squareTop: '375px',
