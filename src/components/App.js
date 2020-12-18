@@ -34,6 +34,7 @@ class App extends React.Component {
   }
 
   toggleStartButton = () => {
+    // stop background/foreground if active
     if (this.state.gameActive) {
       clearInterval(this.state.foregroundTimer)
       clearInterval(this.state.backgroundTimer)
@@ -41,15 +42,17 @@ class App extends React.Component {
         gameActive: false
       })
     } else {
+      // start background/foreground if not active
       this.startForeground()
       this.startBackground()
     }
   }
   calculateButtonPress = () => {
+    // records press duration with cap on how long
     let pressDuration = this.state.buttonPressDuration
     this.setState({
       buttonTimer: setInterval(() => {
-        if (pressDuration > 125) {
+        if (pressDuration > 125) { // stop & exit if more than cap
           this.handleButtonUp()
           return
         }
@@ -62,6 +65,7 @@ class App extends React.Component {
     })
   }
   startForeground = () => {
+    // starts foregound loop
     let fLeft = parseInt(this.state.foregroundLeft)
     this.setState({
       gameActive: true,
@@ -78,6 +82,7 @@ class App extends React.Component {
     })
   }
   startBackground = () => {
+    // starts background loop
     let bLeft = parseInt(this.state.backgroundLeft)
     this.setState({
       backgroundTimer: setInterval(() => {
@@ -116,7 +121,7 @@ class App extends React.Component {
   }
 
   ascend = () => {
-    // console.log('going up!')
+    // moves sprite up
     let squareT = parseInt(this.state.squareTop)
     squareT -= 3
     this.setState({
@@ -125,7 +130,7 @@ class App extends React.Component {
   }
 
   descend = () => {
-    // console.log('going down!')
+    // moves sprite down
     let squareT = parseInt(this.state.squareTop)
     squareT += 3
     this.setState({
@@ -133,7 +138,7 @@ class App extends React.Component {
     })
   }
 
-  reset = () => {
+  reset = () => { // resets game
     clearInterval(this.state.descendTimer)
     this.setState({
       squareTop: '375px',
