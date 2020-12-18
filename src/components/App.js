@@ -7,14 +7,15 @@ import '../css/App.css'
 class App extends React.Component {
   state = {
     squareTop: '375px',
+    squareLeft: '0px',
+    foregroundLeft: '0px',
+    backgroundLeft: '0px',
+    gameActive: false,
     goingUp: false,
     goingDown: false,
     buttonPressDuration: 0,
     buttonTimer: undefined,
     descendTimer: undefined,
-    foregroundLeft: '0px',
-    backgroundLeft: '0px',
-    gameActive: false,
     foregroundTimer: undefined,
     backgroundTimer: undefined
   }
@@ -50,9 +51,12 @@ class App extends React.Component {
   calculateButtonPress = () => {
     // records press duration with cap on how long
     let pressDuration = this.state.buttonPressDuration
-    this.setState({ // need 2 fix
-      buttonTimer: setInterval(() => { // jump ht should be determined by px
-        if (pressDuration > 80) { // not button press duration
+    this.setState({
+      // need 2 fix
+      buttonTimer: setInterval(() => {
+        // jump ht should be determined by px
+        if (pressDuration > 80) {
+          // not button press duration
           // stop & exit if more than cap
           this.handleButtonUp()
           return
@@ -100,6 +104,7 @@ class App extends React.Component {
   }
 
   handleButtonDown = () => {
+    if (!this.state.gameActive) return
     if (this.state.goingUp) return
     this.startAscension()
     this.calculateButtonPress()
