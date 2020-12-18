@@ -50,9 +50,9 @@ class App extends React.Component {
   calculateButtonPress = () => {
     // records press duration with cap on how long
     let pressDuration = this.state.buttonPressDuration
-    this.setState({
-      buttonTimer: setInterval(() => {
-        if (pressDuration > 80) {
+    this.setState({ // need 2 fix
+      buttonTimer: setInterval(() => { // jump ht should be determined by px
+        if (pressDuration > 80) { // not button press duration
           // stop & exit if more than cap
           this.handleButtonUp()
           return
