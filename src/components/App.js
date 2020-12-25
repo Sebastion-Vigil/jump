@@ -7,7 +7,6 @@ import '../css/App.css'
 class App extends React.Component {
   state = {
     squareTop: '375px',
-    squareLeft: '0px',
     foregroundLeft: '0px',
     backgroundLeft: '0px',
     gameActive: false,
@@ -178,7 +177,7 @@ class App extends React.Component {
           <div
             className='square'
             style={{
-              top: this.state.squareTop
+              top: this.state.squareTop,
             }}
           ></div>
         </div>
