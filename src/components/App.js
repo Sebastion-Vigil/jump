@@ -16,7 +16,13 @@ class App extends React.Component {
     buttonTimer: undefined,
     descendTimer: undefined,
     foregroundTimer: undefined,
-    backgroundTimer: undefined
+    backgroundTimer: undefined,
+    obstacles: [] // info for onscreen obstacles
+  }
+
+  generateObstacles = () => {
+    if (!this.state.gameActive) return
+    console.log('generateObstacles button pressed!')
   }
 
   startAscension = () => {
@@ -180,6 +186,13 @@ class App extends React.Component {
               top: this.state.squareTop,
             }}
           ></div>
+          {
+            this.state.obstacles.map((obstacle, i) => {
+              return (
+                <div key={i} className='obstacle'>obstacle</div>
+              )
+            })
+          }
         </div>
         <div
           className='jump-button'
@@ -187,6 +200,7 @@ class App extends React.Component {
           onMouseUp={this.handleButtonUp}
         ></div>
         <div className='start-button' onClick={this.toggleStartButton}></div>
+        <div className='generate-obstacle-button' onClick={this.generateObstacles}></div>
       </div>
     )
   }
