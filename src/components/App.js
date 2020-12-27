@@ -42,6 +42,13 @@ class App extends React.Component {
     // decrements left var for each obstacle
     // if any obstacle fully passed from right to left
     // remove obstacle from obstacles arr w/ splice()
+    const obstacles = this.state.obstacles
+    obstacles.forEach((obstacle, i) => {
+      if (parseInt(obstacle.left) <= -75) {
+        obstacles.splice(i, 1)
+      }
+      obstacle.left = (parseInt(obstacle.left) - 2).toString() + 'px'
+    })
   }
 
   startAscension = () => {
@@ -99,6 +106,7 @@ class App extends React.Component {
     this.setState({
       gameActive: true,
       foregroundTimer: setInterval(() => {
+        this.scanObstacles()
         fLeft += -2
         if (fLeft === -1550) {
           console.log('resetting foregroundLeft!')
