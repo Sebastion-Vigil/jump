@@ -23,6 +23,25 @@ class App extends React.Component {
   generateObstacles = () => {
     if (!this.state.gameActive) return
     console.log('generateObstacles button pressed!')
+    const obstacles = this.state.obstacles
+    obstacles.push(
+      {
+        id: (obstacles.length + 1).toString(),
+        top: '350px',
+        left: '775px'
+      }
+    )
+    this.setState({
+      obstacles: obstacles
+    })
+  }
+
+  scanObstacles = () => {
+    // invoke within interval in startForeground()
+    // scans obstacles state arr
+    // decrements left var for each obstacle
+    // if any obstacle fully passed from right to left
+    // remove obstacle from obstacles arr w/ splice()
   }
 
   startAscension = () => {
@@ -189,7 +208,14 @@ class App extends React.Component {
           {
             this.state.obstacles.map((obstacle, i) => {
               return (
-                <div key={i} className='obstacle'>obstacle</div>
+                <div
+                  className='obstacle'
+                  style={{
+                    top: obstacle.top,
+                    left: obstacle.left
+                  }}
+                  key={i} 
+                ></div>
               )
             })
           }
