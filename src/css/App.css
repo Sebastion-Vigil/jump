@@ -63,7 +63,6 @@
 
 .square {
   position: absolute;
-  left: 100px;
   width: 75px;
   height: 75px;
   border: .5px solid orange;

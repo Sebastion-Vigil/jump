@@ -7,6 +7,7 @@ import '../css/App.css'
 class App extends React.Component {
   state = {
     squareTop: '375px',
+    squareLeft: '100px',
     foregroundLeft: '0px',
     backgroundLeft: '0px',
     gameActive: false,
@@ -24,13 +25,11 @@ class App extends React.Component {
     if (!this.state.gameActive) return
     console.log('generateObstacles button pressed!')
     const obstacles = this.state.obstacles
-    obstacles.push(
-      {
-        id: (obstacles.length + 1).toString(),
-        top: '350px',
-        left: '775px'
-      }
-    )
+    obstacles.push({
+      id: (obstacles.length + 1).toString(),
+      top: '350px',
+      left: '775px'
+    })
     this.setState({
       obstacles: obstacles
     })
@@ -42,10 +41,20 @@ class App extends React.Component {
     // decrements left var for each obstacle
     // if any obstacle fully passed from right to left
     // remove obstacle from obstacles arr w/ splice()
+    // game over if any obstacle touches sprite
     const obstacles = this.state.obstacles
+    const sLeft = this.state.squareLeft
+    const sTop = this.state.squareTop
     obstacles.forEach((obstacle, i) => {
       if (parseInt(obstacle.left) <= -75) {
         obstacles.splice(i, 1)
+      }
+      if (
+        parseInt(obstacle.left) <= parseInt(sLeft) + 75 ||
+        (parseInt(obstacle.top) <= parseInt(sTop) + 75 &&
+          parseInt(obstacle.left) <= parseInt(sLeft) + 75)
+      ) {
+        console.log('gotcha!')
       }
       obstacle.left = (parseInt(obstacle.left) - 2).toString() + 'px'
     })
@@ -211,22 +220,21 @@ class App extends React.Component {
             className='square'
             style={{
               top: this.state.squareTop,
+              left: this.state.squareLeft
             }}
           ></div>
-          {
-            this.state.obstacles.map((obstacle, i) => {
-              return (
-                <div
-                  className='obstacle'
-                  style={{
-                    top: obstacle.top,
-                    left: obstacle.left
-                  }}
-                  key={i} 
-                ></div>
-              )
-            })
-          }
+          {this.state.obstacles.map((obstacle, i) => {
+            return (
+              <div
+                className='obstacle'
+                style={{
+                  top: obstacle.top,
+                  left: obstacle.left
+                }}
+                key={i}
+              ></div>
+            )
+          })}
         </div>
         <div
           className='jump-button'
@@ -234,31 +242,12 @@ class App extends React.Component {
           onMouseUp={this.handleButtonUp}
         ></div>
         <div className='start-button' onClick={this.toggleStartButton}></div>
-        <div className='generate-obstacle-button' onClick={this.generateObstacles}></div>
+        <div
+          className='generate-obstacle-button'
+          onClick={this.generateObstacles}
+        ></div>
       </div>
     )
   }
 }
 export default App
-// as code stands, program waits for press duration to finish before executing
-// need to execute as targetHT is being determined, up to targetHT
-// as button pressed:
-// square ascends up to targetHT, determined by buttonPressDuration
-// square pauses briefly in mid air
-// square descends
-// reset state vars
-// need onMouseDown() without a doubt
-// do we really need a onMouseUp() method?
-// (methinks not)
-// handleButtonPress()
-// is already jumping?
-// need to ascend?
-// need to descend?
-// need to pause?
-// time to reset?
-// ascend()
-//
-// descend()
-//
-// pause()
-//
