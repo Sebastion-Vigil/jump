@@ -95,7 +95,7 @@ class App extends React.Component {
       // need 2 fix
       buttonTimer: setInterval(() => {
         // jump ht should be determined by px
-        if (pressDuration > 80) {
+        if (pressDuration > 100) {
           // not button press duration
           // stop & exit if more than cap
           this.handleButtonUp()
