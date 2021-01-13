@@ -50,11 +50,11 @@ class App extends React.Component {
         obstacles.splice(i, 1)
       }
       if (
-        parseInt(obstacle.left) <= parseInt(sLeft) + 75 ||
-        (parseInt(obstacle.top) <= parseInt(sTop) + 75 &&
+        (parseInt(obstacle.top) <= parseInt(sTop) &&
           parseInt(obstacle.left) <= parseInt(sLeft) + 75)
       ) {
         console.log('gotcha!')
+        this.toggleStartButton()
       }
       obstacle.left = (parseInt(obstacle.left) - 2).toString() + 'px'
     })
