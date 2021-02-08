@@ -50,14 +50,13 @@ class App extends React.Component {
         obstacles.splice(i, 1)
       }
       if (
-        parseInt(obstacle.top) <= parseInt(sTop) &&
-        parseInt(obstacle.left) <= parseInt(sLeft) + 75
+        (parseInt(obstacle.left) >= parseInt(sLeft) && parseInt(obstacle.left) < parseInt(sLeft) + 75) &&
+        (parseInt(obstacle.top) >= parseInt(sTop) && parseInt(obstacle.top) < parseInt(sTop) + 75)
       ) {
-        alert(`gotcha! sLeft: ${sLeft} sTop: ${sTop} obstacle.left: ${obstacle.left} obstacle.top: ${obstacle.top}`)
-        // console.log('sLeft: ', sLeft)
-        // console.log('sTop: ', sTop)
-        // console.log('obstacle Top: ', obstacle.top)
-        // console.log('obstacle Left: ', obstacle.left)
+        console.log(`gotcha! sLeft: ${sLeft} sTop: ${sTop} obstacle.left: ${obstacle.left} obstacle.top: ${obstacle.top}`)
+        alert(
+          `gotcha! sLeft: ${sLeft} sTop: ${sTop} obstacle.left: ${obstacle.left} obstacle.top: ${obstacle.top}`
+        )
         // this.toggleStartButton()
       }
       obstacle.left = (parseInt(obstacle.left) - 2).toString() + 'px'
@@ -147,7 +146,7 @@ class App extends React.Component {
         this.setState({
           backgroundLeft: bLeft + 'px'
         })
-      }, 40)
+      }, 60)
     })
   }
 
