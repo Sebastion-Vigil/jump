@@ -50,8 +50,8 @@ class App extends React.Component {
         obstacles.splice(i, 1)
       }
       if (
-        (parseInt(obstacle.left) >= parseInt(sLeft) && parseInt(obstacle.left) < parseInt(sLeft) + 75) &&
-        (parseInt(obstacle.top) >= parseInt(sTop) && parseInt(obstacle.top) < parseInt(sTop) + 75)
+        (parseInt(obstacle.left) >= parseInt(sLeft) && parseInt(obstacle.left) < parseInt(sLeft) + 75) && 
+        (parseInt(sTop) >= parseInt(obstacle.top) && parseInt(sTop) < parseInt(obstacle.top) + 100)
       ) {
         console.log(`gotcha! sLeft: ${sLeft} sTop: ${sTop} obstacle.left: ${obstacle.left} obstacle.top: ${obstacle.top}`)
         alert(
@@ -259,3 +259,5 @@ class App extends React.Component {
 export default App
 // Porque de tal manera amó Dios al mundo, que ha dado a su Hijo Unigénito para que
 // todo aquel que en Él crea, no se pierda, mas tenga vida eterna. Juan 3:16
+
+// (parseInt(obstacle.top) >= parseInt(sTop) && parseInt(obstacle.top) < parseInt(sTop) + 75)
