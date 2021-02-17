@@ -50,11 +50,16 @@ class App extends React.Component {
         obstacles.splice(i, 1)
       }
       if (
-        (parseInt(obstacle.left) > parseInt(sLeft) && parseInt(obstacle.left) < parseInt(sLeft) + 75) && 
-        (parseInt(sTop) > parseInt(obstacle.top) && parseInt(sTop) < parseInt(obstacle.top) + 100)
+        ((parseInt(obstacle.left) >= parseInt(sLeft) &&
+          parseInt(obstacle.left) <= parseInt(sLeft) + 75) ||
+          (parseInt(obstacle.left) <= parseInt(sLeft) &&
+            parseInt(obstacle.left) + 75 >= parseInt(sLeft))) &&
+        parseInt(sTop) + 75 >= parseInt(obstacle.top) &&
+          parseInt(sTop) + 75 <= parseInt(obstacle.top) + 100
       ) {
-        // (parseInt(obstacle.top) >= parseInt(sTop) && parseInt(obstacle.top) < parseInt(sTop) + 75)
-        console.log(`gotcha! sLeft: ${sLeft} sTop: ${sTop} obstacle.left: ${obstacle.left} obstacle.top: ${obstacle.top}`)
+        console.log(
+          `gotcha! sLeft: ${sLeft} sTop: ${sTop} obstacle.left: ${obstacle.left} obstacle.top: ${obstacle.top}`
+        )
         // alert(
         //   `gotcha! sLeft: ${sLeft} sTop: ${sTop} obstacle.left: ${obstacle.left} obstacle.top: ${obstacle.top}`
         // )
