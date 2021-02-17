@@ -49,20 +49,18 @@ class App extends React.Component {
       if (parseInt(obstacle.left) <= -75) {
         obstacles.splice(i, 1)
       }
-      if (
+      if ( // is obstacle within sprite's horizontal space?
         ((parseInt(obstacle.left) >= parseInt(sLeft) &&
           parseInt(obstacle.left) <= parseInt(sLeft) + 75) ||
           (parseInt(obstacle.left) <= parseInt(sLeft) &&
             parseInt(obstacle.left) + 75 >= parseInt(sLeft))) &&
+            // is sprite within obstacle's vertical space? 
         parseInt(sTop) + 75 >= parseInt(obstacle.top) &&
           parseInt(sTop) + 75 <= parseInt(obstacle.top) + 100
       ) {
         console.log(
           `gotcha! sLeft: ${sLeft} sTop: ${sTop} obstacle.left: ${obstacle.left} obstacle.top: ${obstacle.top}`
         )
-        // alert(
-        //   `gotcha! sLeft: ${sLeft} sTop: ${sTop} obstacle.left: ${obstacle.left} obstacle.top: ${obstacle.top}`
-        // )
         // obstacles.splice(i, 1)
         this.toggleStartButton()
       }
@@ -264,5 +262,3 @@ class App extends React.Component {
   }
 }
 export default App
-// Porque de tal manera amó Dios al mundo, que ha dado a su Hijo Unigénito para que
-// todo aquel que en Él crea, no se pierda, mas tenga vida eterna. Juan 3:16
