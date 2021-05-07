@@ -26,7 +26,7 @@ class App extends React.Component {
     console.log('generateObstacles button pressed!')
     const obstacles = this.state.obstacles
     obstacles.push({
-      id: (obstacles.length + 1).toString(),
+      id: (obstacles.length + 1).toString(), // make 1st id 1
       top: '350px',
       left: '775px'
     })
@@ -49,14 +49,15 @@ class App extends React.Component {
       if (parseInt(obstacle.left) <= -75) {
         obstacles.splice(i, 1)
       }
-      if ( // is obstacle within sprite's horizontal space?
+      if (
+        // is obstacle within sprite's horizontal space?
         ((parseInt(obstacle.left) >= parseInt(sLeft) &&
           parseInt(obstacle.left) <= parseInt(sLeft) + 75) ||
           (parseInt(obstacle.left) <= parseInt(sLeft) &&
             parseInt(obstacle.left) + 75 >= parseInt(sLeft))) &&
-            // is sprite within obstacle's vertical space? 
+        // is sprite within obstacle's vertical space?
         parseInt(sTop) + 75 >= parseInt(obstacle.top) &&
-          parseInt(sTop) + 75 <= parseInt(obstacle.top) + 100
+        parseInt(sTop) + 75 <= parseInt(obstacle.top) + 100
       ) {
         console.log(
           `gotcha! sLeft: ${sLeft} sTop: ${sTop} obstacle.left: ${obstacle.left} obstacle.top: ${obstacle.top}`
@@ -181,7 +182,7 @@ class App extends React.Component {
   ascend = () => {
     // moves sprite up
     let squareT = parseInt(this.state.squareTop)
-    squareT -= 3
+    squareT -= 4
     this.setState({
       squareTop: squareT + 'px'
     })
@@ -190,7 +191,7 @@ class App extends React.Component {
   descend = () => {
     // moves sprite down
     let squareT = parseInt(this.state.squareTop)
-    squareT += 3
+    squareT += 4
     this.setState({
       squareTop: squareT + 'px'
     })
